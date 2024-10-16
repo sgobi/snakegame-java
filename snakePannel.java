@@ -4,6 +4,8 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.Random;
 import javax.swing.JPanel;
 import javax.swing.Timer;
@@ -25,7 +27,8 @@ public class snakePannel extends JPanel implements ActionListener {
         timer = new Timer(delay, this);
         this.setPreferredSize(new Dimension(screenWidth, screenWidth));
         this.setBackground(Color.BLACK);
-
+        this.setFocusable(true);
+        this.addKeyListener(new myKeyAdepter());
         startGame();
     }
 
@@ -91,4 +94,56 @@ if (running) {
 repaint();
 
 }
+
+
+public class myKeyAdepter implements KeyListener {
+
+
+
+
+    @Override
+    public void keyPressed(KeyEvent ke) {
+       
+
+        switch (ke.getKeyCode()) {
+            case KeyEvent.VK_LEFT:
+            {
+                
+                if (direction != 'R') {
+                    direction = 'L';
+                }
+            }
+                break;
+
+            case KeyEvent.VK_RIGHT:
+                if (direction != 'L') {
+                    direction = 'R';
+                }
+                break;
+            case KeyEvent.VK_UP:
+                if (direction != 'D') {
+                    direction = 'U';
+                }
+                break;
+            case KeyEvent.VK_DOWN:
+                if (direction != 'U') {
+                    direction = 'D';
+                }
+                break;
+        }
+    }
+
+        @Override
+        public void keyTyped(KeyEvent ke) {
+            //throw new UnsupportedOperationException("Not supported yet.");
+        }
+
+        @Override
+        public void keyReleased(KeyEvent ke) {
+           // throw new UnsupportedOperationException("Not supported yet.");
+        }
+
+
+}
+
 }
