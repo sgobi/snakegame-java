@@ -81,14 +81,26 @@ public class snakePannel extends JPanel implements ActionListener {
     }
 
     public void newEgg() {
-        eggX = random.nextInt(gameUnits);
-        eggY = random.nextInt(gameUnits);
+        eggX = random.nextInt((screenWidth / unitSize))*unitSize;
+        eggY = random.nextInt((screenHeight / unitSize))*unitSize;
     }
+
+    public void checkEgg() {
+
+           if ((snakeX[0] == eggX) && (snakeY[0] == eggY)) {
+            System.out.println("Egg eaten! New body parts: " + bodyParts);
+
+            bodyParts++;
+            newEgg();
+        } 
+    }
+
 
     @Override
     public void actionPerformed(ActionEvent ae) {
 if (running) {
     move();
+    checkEgg();
 
 }    
 repaint();
